@@ -1,0 +1,6 @@
+[
+  {
+    "event": "Stop",
+    "command": "${CLAUDE_PLUGIN_ROOT}/hooks/stop-hook.sh"
+  }
+]

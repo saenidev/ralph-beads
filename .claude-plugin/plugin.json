@@ -1,0 +1,6 @@
+{
+  "name": "ralph-beads",
+  "version": "1.0.0",
+  "description": "Ralph Loop + Beads integration - tracks Ralph sessions as Beads epics",
+  "author": "local"
+}
