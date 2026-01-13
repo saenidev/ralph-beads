@@ -1,6 +1,7 @@
 ---
 description: Start a Ralph loop with Beads epic tracking
 argument-hint: <prompt> [--max-iterations N] [--completion-promise TEXT]
+allowed-tools: ["Bash", "Write", "Read"]
 ---
 
 # Ralph Loop + Beads

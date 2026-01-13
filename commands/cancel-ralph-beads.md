@@ -1,20 +1,27 @@
 ---
 description: Cancel an active Ralph loop with Beads integration
-allowed-tools:
-  - Bash: test -f .claude/ralph-loop.local.md
-  - Bash: rm .claude/ralph-loop.local.md
-  - Bash: bd close *
-  - Read: .claude/ralph-loop.local.md
 ---
+
+# Cancel Ralph Loop
 
 Cancel an active Ralph loop and close the associated beads epic.
 
-Steps:
-1. Check if `.claude/ralph-loop.local.md` exists
-2. If it exists:
-   - Read the file to get iteration count and beads_epic_id
-   - Close the beads epic with reason "Cancelled by user"
-   - Remove the state file
-   - Report: "Ralph loop cancelled after N iterations. Epic [ID] closed."
-3. If it doesn't exist:
+## Steps
+
+1. Check if `.claude/ralph-loop.local.md` exists using Bash: `test -f .claude/ralph-loop.local.md`
+
+2. If it **does not exist**:
    - Report: "No active Ralph loop found."
+   - Stop here.
+
+3. If it **exists**:
+   - Read the file to extract `iteration` and `beads_epic_id` from the YAML frontmatter
+   - If `beads_epic_id` is not empty, close the epic:
+     ```bash
+     bd close "<epic_id>" --reason "Cancelled by user after N iterations"
+     ```
+   - Remove the state file:
+     ```bash
+     rm .claude/ralph-loop.local.md
+     ```
+   - Report: "Ralph loop cancelled after N iterations. Epic [ID] closed." (or without epic part if no epic was tracked)
