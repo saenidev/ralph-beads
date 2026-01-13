@@ -1,0 +1,17 @@
+{
+  "name": "ralph-beads-marketplace",
+  "owner": {
+    "name": "saenidev"
+  },
+  "plugins": [
+    {
+      "name": "ralph-beads",
+      "source": {
+        "source": "github",
+        "repo": "saenidev/ralph-beads"
+      },
+      "description": "Ralph Loop + Beads integration - tracks Ralph sessions as Beads epics",
+      "version": "1.0.0"
+    }
+  ]
+}
