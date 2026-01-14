@@ -59,8 +59,15 @@ close_beads_epic() {
   local iterations="$2"
 
   if [[ "$BEADS_ENABLED" == "true" ]] && [[ -n "$BEADS_EPIC_ID" ]] && command -v bd &> /dev/null; then
-    bd close "$BEADS_EPIC_ID" --reason "$reason after $iterations iterations" 2>/dev/null || true
-    echo "📋 Closed beads epic: $BEADS_EPIC_ID ($reason)"
+    local close_output
+    if close_output=$(bd close "$BEADS_EPIC_ID" --reason "$reason after $iterations iterations" 2>&1); then
+      echo "📋 Closed beads epic: $BEADS_EPIC_ID ($reason)"
+    else
+      echo "⚠️  Failed to close beads epic $BEADS_EPIC_ID: $close_output" >&2
+      echo "   Run manually: bd close $BEADS_EPIC_ID" >&2
+    fi
+  elif [[ "$BEADS_ENABLED" == "true" ]] && [[ -n "$BEADS_EPIC_ID" ]]; then
+    echo "⚠️  bd command not found - run manually: bd close $BEADS_EPIC_ID" >&2
   fi
 }
 
